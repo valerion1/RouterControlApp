@@ -1,7 +1,7 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include "control.h"
+#include "cpp/control.h"
 
 int main(int argc, char *argv[])
 {
