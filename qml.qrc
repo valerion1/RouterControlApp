@@ -1,8 +1,14 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
         <file>components/MainMenu.qml</file>
-        <file>components/NavigateButton.qml</file>
         <file>components/RApplicationWindow.qml</file>
+        <file>components/RProgressBar.qml</file>
+        <file>components/UpButton.qml</file>
+        <file>components/NavigateBlock.qml</file>
+        <file>main.qml</file>
+    </qresource>
+    <qresource prefix="/img">
+        <file>resource/but_up.png</file>
+        <file>resource/ok.png</file>
     </qresource>
 </RCC>

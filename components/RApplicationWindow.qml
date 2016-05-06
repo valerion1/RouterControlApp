@@ -9,16 +9,18 @@ ApplicationWindow {
     width: 640;
     height: 480;
     title: "Router Controller";
-    visibility: settings.debugMode ? "FullScreen" : "Maximized"
+    visibility: settings.debugMode ? "FullScreen" : "Maximized";
+
+    property color backColor: "#595959";
 
     style: ApplicationWindowStyle{
         background: Rectangle{
-            color: "#595959";
+            color: backColor;
         }
     }
 
     Connections{
-        target: control;
+        target: router;
     }
 
     Component.onCompleted: {

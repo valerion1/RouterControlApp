@@ -5,6 +5,8 @@ import "../components"
 Item {
     id: mainMenu;
 
+    property alias headerTitle: label.text;
+
     Rectangle{
         id: header;
         height: 22 * settings.pixelDensity;
@@ -48,6 +50,10 @@ Item {
         }
     }
 
+
+
+
+
     Column{
         id: navigateColumn;
         anchors.right: parent.right;
@@ -55,11 +61,20 @@ Item {
         anchors.top: header.bottom;
         anchors.bottom: parent.bottom;
 
-        NavigateButton{
+        NavigateBlock{
             id: stateButton;
             text: "Состояние";
 
-            color: click ? "#828282" : "#595959";
+            color: click && !stateButton.showed ? "#828282" : "#595959";
+
+            onClicked: {
+                if(!stateButton.showed){
+                    stateButton.show();
+                    buttonHide.enabled = true;
+                    buttonHide.opacity = 1;
+                }
+            }
+
 
             Rectangle{
                 height: 0.3 * settings.pixelDensity;
@@ -68,14 +83,70 @@ Item {
                 anchors.bottom: parent.bottom;
                 color: "#fff";
             }
+
+            UpButton{
+                id: buttonHide;
+                enabled: false;
+                anchors.bottom: parent.bottom;
+                anchors.horizontalCenter: parent.horizontalCenter;
+                anchors.bottomMargin: 10 * settings.pixelDensity;
+
+                onClicked:{
+                    stateButton.hide();
+                    buttonHide.opacity = 0;
+                    buttonHide.enabled = false;
+                }
+            }
+
         }
 
-        NavigateButton{
+        NavigateBlock{
             id: rebootButton;
             text: "Перезагрузка";
 
             color: click ? "#828282" : "#595959";
 
+            onClicked: {
+                timer.start();
+                progressBar.value = 0;
+                progressBar.visible = true;
+
+                router.reboot();
+            }
+
+            RProgressBar{
+                id: progressBar;
+
+                visible: false;
+
+                outerColor: "#595959";
+                activeColor: "lightgreen";
+
+                anchors.right: parent.right;
+                anchors.rightMargin: 10 * settings.pixelDensity;
+                anchors.verticalCenter: parent.verticalCenter;
+
+                maximumValue: 100;
+                minimumValue: 0;
+                value: 0;
+
+
+                Timer{
+                    id: timer;
+                    interval: 50;
+                    repeat: true;
+                    onTriggered:{
+                        progressBar.value += 1;
+                        if(progressBar.value == 100){
+                            timer.stop();
+                            progressBar.visible = false;
+        //                    progressBar.complite();
+                        }
+                    }
+                }
+            }
+
+
             Rectangle{
                 height: 0.3 * settings.pixelDensity;
                 anchors.right: parent.right;
@@ -83,9 +154,9 @@ Item {
                 anchors.bottom: parent.bottom;
                 color: "#fff";
             }
-
-            onClicked: control.reboot();
         }
     }
+
+
 }
 

@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 
     QQmlContext* context = engine.rootContext();
 
-    context->setContextProperty("control", control);
+    context->setContextProperty("router", control);
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 

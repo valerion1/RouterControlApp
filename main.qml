@@ -8,7 +8,7 @@ RApplicationWindow{
     StackView{
         id: stackView;
         anchors.fill: parent;
-        initialItem: MainMenu {}
+        initialItem: MainMenu{}
     }
 }
 
